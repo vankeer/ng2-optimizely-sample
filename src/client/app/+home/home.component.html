@@ -1,0 +1,10 @@
+<p *ngIf="!(isAuthenticated$ | async)">
+	Click the button in the top right to "log in".<br/>
+	This will reveal a button only visible to authenticated users.
+</p>
+
+<div *ngIf="isAuthenticated$ | async">
+	<p>You are authenticated!</p>
+	<button>Call to action</button>
+</div>
+

@@ -1,0 +1,10 @@
+<h1>ng2-optimizely-sample</h1>
+
+<span class="right" *ngIf="!(isAuthenticated$ | async)">
+	<button (click)="login()">log in</button>
+</span>
+
+<span class="right" *ngIf="isAuthenticated$ | async">
+	<span class="welcome">Welcome!</span>
+	<button (click)="logout()">log out</button>
+</span>

@@ -3,6 +3,19 @@
 Sample Angular 2 application based on [angular2-seed](https://github.com/mgechev/angular2-seed).
 Made specifically for testing Optimizely experiments.
 
+This demonstrates how to expose (part of) the application state to the global window variable, for consumption by Optimizely.
+
+# Table of Content
+
+- [Introduction](#introduction)
+- [Table of Content](#table-of-content)
+- [How to start](#how-to-start)
+- [Optimizely Experiment Example](#optimizely-experiment-example)
+- [Configuration](#configuration)
+- [Environment Configuration](#environment-configuration)
+- [Tools documentation](#tools-documentation)
+- [License](#license)
+
 # How to start
 
 **Note** that this project requires node v4.x.x or higher and npm 2.14.7.
@@ -29,15 +42,23 @@ npm run build.prod
 
 _Does not rely on any global dependencies._
 
-# Table of Content
+# Optimizely Experiment Example
 
-- [Introduction](#introduction)
-- [How to start](#how-to-start)
-- [Table of Content](#table-of-content)
-- [Configuration](#configuration)
-- [Environment Configuration](#environment-configuration)
-- [Tools documentation](#tools-documentation)
-- [License](#license)
+Create an experiment with activation mode "conditional" and use the exposed state on the window variable to write your conditions.
+
+For example:
+
+```js
+function (activate, options) {
+	setInterval(function () {
+		if (window.state && window.state.isAuthenticated) {
+			activate();
+		}
+	}, 50);
+}
+```
+
+![Example](optimizely-experiment-example.PNG)
 
 # Configuration
 

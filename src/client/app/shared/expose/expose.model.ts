@@ -1,7 +1,9 @@
+import { Subject } from "rxjs/Subject";
+
 export interface ExposedState {
 	isAuthenticated: boolean;
 }
 
 export interface ExposingWindow extends Window {
-	state: ExposedState;
+	stateUpdates: Subject<ExposedState>;
 }

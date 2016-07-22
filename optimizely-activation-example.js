@@ -1,3 +1,5 @@
+// Optimizely activation script
+
 function(activate, options) {
 	var intervalID = setInterval(function(){
 		if (window.stateUpdates && window.stateUpdates.subscribe) {

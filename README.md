@@ -44,15 +44,21 @@ _Does not rely on any global dependencies._
 
 # Optimizely Experiment Example
 
-Create an experiment with activation mode "conditional" and use the exposed state on the window variable to write your conditions.
+This works by publishing part of the state (ExposedState): 
+In Optimizely you write a script for subscribing to these state changes and activating experiments accordingly.
 
-For example:
+For example, use conditional activation mode and add this script:
 
 ```js
-function (activate, options) {
-	setInterval(function () {
-		if (window.state && window.state.isAuthenticated) {
-			activate();
+function(activate, options) {
+	var intervalID = setInterval(function(){
+		if (window.stateUpdates && window.stateUpdates.subscribe) {
+			clearInterval(intervalID);
+			window.stateUpdates.subscribe(function(state) {
+				if (state.isAuthenticated) {
+					activate();
+				}
+			});
 		}
 	}, 50);
 }
